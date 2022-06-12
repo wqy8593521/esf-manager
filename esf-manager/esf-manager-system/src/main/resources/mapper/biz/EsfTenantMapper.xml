@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esf.biz.mapper.EsfTenantMapper">
+    <resultMap type="EsfTenant" id="EsfTenantResult">
+        <result property="id" column="id"/>
+        <result property="tenantName" column="tenant_name"/>
+        <result property="tenantMobile" column="tenant_mobile"/>
+        <result property="tenantAvatar" column="tenant_avatar"/>
+        <result property="tenantSex" column="tenant_sex"/>
+        <result property="tenantAge" column="tenant_age"/>
+        <result property="tenantIdCard" column="tenant_id_card"/>
+        <result property="addressCode" column="address_code"/>
+        <result property="addressInfo" column="address_info"/>
+    </resultMap>
+
+    <sql id="selectEsfTenantVo">
+        select id,
+               tenant_name,
+               tenant_mobile,
+               tenant_avatar,
+               tenant_sex,
+               tenant_age,
+               tenant_id_card,
+               address_code,
+               address_info
+        from esf_tenant
+    </sql>
+
+    <select id="selectEsfTenantList" parameterType="EsfTenant" resultMap="EsfTenantResult">
+        <include refid="selectEsfTenantVo"/>
+        <where>
+            <if test="tenantName != null  and tenantName != ''">
+                and tenant_name like concat('%', #{tenantName}, '%')
+            </if>
+            <if test="tenantMobile != null  and tenantMobile != ''">
+                and tenant_mobile = #{tenantMobile}
+            </if>
+            <if test="tenantAvatar != null  and tenantAvatar != ''">
+                and tenant_avatar = #{tenantAvatar}
+            </if>
+            <if test="tenantSex != null ">
+                and tenant_sex = #{tenantSex}
+            </if>
+            <if test="tenantAge != null ">
+                and tenant_age = #{tenantAge}
+            </if>
+            <if test="tenantIdCard != null  and tenantIdCard != ''">
+                and tenant_id_card = #{tenantIdCard}
+            </if>
+            <if test="addressCode != null  and addressCode != ''">
+                and address_code = #{addressCode}
+            </if>
+            <if test="addressInfo != null  and addressInfo != ''">
+                and address_info = #{addressInfo}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectEsfTenantById" parameterType="Long" resultMap="EsfTenantResult">
+        <include refid="selectEsfTenantVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertEsfTenant" parameterType="EsfTenant" useGeneratedKeys="true" keyProperty="id">
+        insert into esf_tenant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tenantName != null">
+                tenant_name,
+            </if>
+            <if test="tenantMobile != null">
+                tenant_mobile,
+            </if>
+            <if test="tenantAvatar != null">
+                tenant_avatar,
+            </if>
+            <if test="tenantSex != null">
+                tenant_sex,
+            </if>
+            <if test="tenantAge != null">
+                tenant_age,
+            </if>
+            <if test="tenantIdCard != null">
+                tenant_id_card,
+            </if>
+            <if test="addressCode != null">
+                address_code,
+            </if>
+            <if test="addressInfo != null">
+                address_info,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tenantName != null">
+                #{tenantName},
+            </if>
+            <if test="tenantMobile != null">
+                #{tenantMobile},
+            </if>
+            <if test="tenantAvatar != null">
+                #{tenantAvatar},
+            </if>
+            <if test="tenantSex != null">
+                #{tenantSex},
+            </if>
+            <if test="tenantAge != null">
+                #{tenantAge},
+            </if>
+            <if test="tenantIdCard != null">
+                #{tenantIdCard},
+            </if>
+            <if test="addressCode != null">
+                #{addressCode},
+            </if>
+            <if test="addressInfo != null">
+                #{addressInfo},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateEsfTenant" parameterType="EsfTenant">
+        update esf_tenant
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tenantName != null">
+                tenant_name = #{tenantName},
+            </if>
+            <if test="tenantMobile != null">
+                tenant_mobile = #{tenantMobile},
+            </if>
+            <if test="tenantAvatar != null">
+                tenant_avatar = #{tenantAvatar},
+            </if>
+            <if test="tenantSex != null">
+                tenant_sex = #{tenantSex},
+            </if>
+            <if test="tenantAge != null">
+                tenant_age = #{tenantAge},
+            </if>
+            <if test="tenantIdCard != null">
+                tenant_id_card = #{tenantIdCard},
+            </if>
+            <if test="addressCode != null">
+                address_code = #{addressCode},
+            </if>
+            <if test="addressInfo != null">
+                address_info = #{addressInfo},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEsfTenantById" parameterType="Long">
+        delete
+        from esf_tenant
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteEsfTenantByIds" parameterType="String">
+        delete from esf_tenant where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

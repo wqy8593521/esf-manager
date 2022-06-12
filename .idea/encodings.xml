@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/esf_manager/esf_manager-admin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/esf_manager/esf_manager-admin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/esf_manager/esf_manager-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/esf_manager/esf_manager-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/esf_manager/esf_manager-framework/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/esf_manager/esf_manager-framework/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/esf_manager/esf_manager-generator/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/esf_manager/esf_manager-generator/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/esf_manager/esf_manager-quartz/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/esf_manager/esf_manager-quartz/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/esf_manager/esf_manager-system/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/esf_manager/esf_manager-system/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/esf_manager/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/esf_manager/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

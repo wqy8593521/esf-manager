@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/esf-manager.iml" filepath="$PROJECT_DIR$/.idea/esf-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/esf_manager/esfManager.iml" filepath="$PROJECT_DIR$/esf_manager/esfManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/esf_manager/esf_manager-admin/esfManager-admin.iml" filepath="$PROJECT_DIR$/esf_manager/esf_manager-admin/esfManager-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/esf_manager/esf_manager-common/esfManager-common.iml" filepath="$PROJECT_DIR$/esf_manager/esf_manager-common/esfManager-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/esf_manager/esf_manager-framework/esfManager-framework.iml" filepath="$PROJECT_DIR$/esf_manager/esf_manager-framework/esfManager-framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/esf_manager/esf_manager-generator/esfManager-generator.iml" filepath="$PROJECT_DIR$/esf_manager/esf_manager-generator/esfManager-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/esf_manager/esf_manager-quartz/esfManager-quartz.iml" filepath="$PROJECT_DIR$/esf_manager/esf_manager-quartz/esfManager-quartz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/esf_manager/esf_manager-system/esfManager-system.iml" filepath="$PROJECT_DIR$/esf_manager/esf_manager-system/esfManager-system.iml" />
+    </modules>
+  </component>
+</project>

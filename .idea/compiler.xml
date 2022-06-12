@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="esfManager-system" />
+        <module name="esfManager-generator" />
+        <module name="esfManager-common" />
+        <module name="esfManager-framework" />
+        <module name="esfManager-admin" />
+        <module name="esfManager-quartz" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="esfManager" target="1.8" />
+      <module name="esfManager-admin" target="1.8" />
+      <module name="esfManager-common" target="1.8" />
+      <module name="esfManager-framework" target="1.8" />
+      <module name="esfManager-generator" target="1.8" />
+      <module name="esfManager-quartz" target="1.8" />
+      <module name="esfManager-system" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

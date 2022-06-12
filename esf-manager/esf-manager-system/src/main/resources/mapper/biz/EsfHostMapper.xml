@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esf.biz.mapper.EsfHostMapper">
+    <resultMap type="EsfHost" id="EsfHostResult">
+        <result property="id" column="id"/>
+        <result property="hostName" column="host_name"/>
+        <result property="hostMobile" column="host_mobile"/>
+        <result property="hostAvatar" column="host_avatar"/>
+        <result property="hostSex" column="host_sex"/>
+        <result property="hostAge" column="host_age"/>
+        <result property="houseNum" column="house_num"/>
+        <result property="addressCode" column="address_code"/>
+        <result property="addressInfo" column="address_info"/>
+    </resultMap>
+
+    <sql id="selectEsfHostVo">
+        select id,
+               host_name,
+               host_mobile,
+               host_avatar,
+               host_sex,
+               host_age,
+               house_num,
+               address_code,
+               address_info
+        from esf_host
+    </sql>
+
+    <select id="selectEsfHostList" parameterType="EsfHost" resultMap="EsfHostResult">
+        <include refid="selectEsfHostVo"/>
+        <where>
+            <if test="searchValue != null  and searchValue != ''">
+                or host_name like concat('%', #{searchValue}, '%')
+                or host_mobile = #{searchValue}
+            </if>
+            <if test="hostName != null  and hostName != ''">
+                and host_name like concat('%', #{hostName}, '%')
+            </if>
+            <if test="hostMobile != null  and hostMobile != ''">
+                and host_mobile = #{hostMobile}
+            </if>
+            <if test="hostAvatar != null  and hostAvatar != ''">
+                and host_avatar = #{hostAvatar}
+            </if>
+            <if test="hostSex != null ">
+                and host_sex = #{hostSex}
+            </if>
+            <if test="hostAge != null ">
+                and host_age = #{hostAge}
+            </if>
+            <if test="houseNum != null ">
+                and house_num = #{houseNum}
+            </if>
+            <if test="addressCode != null  and addressCode != ''">
+                and address_code = #{addressCode}
+            </if>
+            <if test="addressInfo != null  and addressInfo != ''">
+                and address_info = #{addressInfo}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectEsfHostById" parameterType="Long" resultMap="EsfHostResult">
+        <include refid="selectEsfHostVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertEsfHost" parameterType="EsfHost" useGeneratedKeys="true" keyProperty="id">
+        insert into esf_host
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hostName != null">
+                host_name,
+            </if>
+            <if test="hostMobile != null">
+                host_mobile,
+            </if>
+            <if test="hostAvatar != null">
+                host_avatar,
+            </if>
+            <if test="hostSex != null">
+                host_sex,
+            </if>
+            <if test="hostAge != null">
+                host_age,
+            </if>
+            <if test="houseNum != null">
+                house_num,
+            </if>
+            <if test="addressCode != null">
+                address_code,
+            </if>
+            <if test="addressInfo != null">
+                address_info,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hostName != null">
+                #{hostName},
+            </if>
+            <if test="hostMobile != null">
+                #{hostMobile},
+            </if>
+            <if test="hostAvatar != null">
+                #{hostAvatar},
+            </if>
+            <if test="hostSex != null">
+                #{hostSex},
+            </if>
+            <if test="hostAge != null">
+                #{hostAge},
+            </if>
+            <if test="houseNum != null">
+                #{houseNum},
+            </if>
+            <if test="addressCode != null">
+                #{addressCode},
+            </if>
+            <if test="addressInfo != null">
+                #{addressInfo},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateEsfHost" parameterType="EsfHost">
+        update esf_host
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="hostName != null">
+                host_name = #{hostName},
+            </if>
+            <if test="hostMobile != null">
+                host_mobile = #{hostMobile},
+            </if>
+            <if test="hostAvatar != null">
+                host_avatar = #{hostAvatar},
+            </if>
+            <if test="hostSex != null">
+                host_sex = #{hostSex},
+            </if>
+            <if test="hostAge != null">
+                host_age = #{hostAge},
+            </if>
+            <if test="houseNum != null">
+                house_num = #{houseNum},
+            </if>
+            <if test="addressCode != null">
+                address_code = #{addressCode},
+            </if>
+            <if test="addressInfo != null">
+                address_info = #{addressInfo},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEsfHostById" parameterType="Long">
+        delete
+        from esf_host
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteEsfHostByIds" parameterType="String">
+        delete from esf_host where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

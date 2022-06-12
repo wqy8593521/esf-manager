@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esf.biz.mapper.EsfRoomRegionMapper">
+    
+    <resultMap type="EsfRoomRegion" id="EsfRoomRegionResult">
+        <result property="id"    column="id"    />
+        <result property="addressCode"    column="address_code"    />
+        <result property="addressInfo"    column="address_info"    />
+        <result property="regionName"    column="region_name"    />
+    </resultMap>
+
+    <sql id="selectEsfRoomRegionVo">
+        select id, address_code, address_info, region_name from esf_room_region
+    </sql>
+
+    <select id="selectEsfRoomRegionList" parameterType="EsfRoomRegion" resultMap="EsfRoomRegionResult">
+        <include refid="selectEsfRoomRegionVo"/>
+        <where>  
+            <if test="addressCode != null  and addressCode != ''"> and address_code = #{addressCode}</if>
+            <if test="addressInfo != null  and addressInfo != ''"> and address_info = #{addressInfo}</if>
+            <if test="regionName != null  and regionName != ''"> and region_name like concat('%', #{regionName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectEsfRoomRegionById" parameterType="Long" resultMap="EsfRoomRegionResult">
+        <include refid="selectEsfRoomRegionVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertEsfRoomRegion" parameterType="EsfRoomRegion" useGeneratedKeys="true" keyProperty="id">
+        insert into esf_room_region
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="addressCode != null">address_code,</if>
+            <if test="addressInfo != null">address_info,</if>
+            <if test="regionName != null">region_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="addressCode != null">#{addressCode},</if>
+            <if test="addressInfo != null">#{addressInfo},</if>
+            <if test="regionName != null">#{regionName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEsfRoomRegion" parameterType="EsfRoomRegion">
+        update esf_room_region
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="addressCode != null">address_code = #{addressCode},</if>
+            <if test="addressInfo != null">address_info = #{addressInfo},</if>
+            <if test="regionName != null">region_name = #{regionName},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEsfRoomRegionById" parameterType="Long">
+        delete from esf_room_region where id = #{id}
+    </delete>
+
+    <delete id="deleteEsfRoomRegionByIds" parameterType="String">
+        delete from esf_room_region where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

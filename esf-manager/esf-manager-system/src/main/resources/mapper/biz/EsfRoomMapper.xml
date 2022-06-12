@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esf.biz.mapper.EsfRoomMapper">
+    <resultMap type="EsfRoom" id="EsfRoomResult">
+        <result property="id" column="id"/>
+        <result property="regionId" column="region_id"/>
+        <result property="roomName" column="room_name"/>
+        <result property="roomType" column="room_type"/>
+        <result property="roomSpec" column="room_spec"/>
+        <result property="roomCapacity" column="room_capacity"/>
+        <result property="roomPic" column="room_pic"/>
+        <result property="roomStatus" column="room_status"/>
+        <result property="roomCost" column="room_cost"/>
+    </resultMap>
+
+    <sql id="selectEsfRoomVo">
+        select id,
+               region_id,
+               room_name,
+               room_type,
+               room_spec,
+               room_capacity,
+               room_pic,
+               room_status,
+               room_cost
+        from esf_room
+    </sql>
+
+    <select id="selectEsfRoomList" parameterType="EsfRoom" resultMap="EsfRoomResult">
+        <include refid="selectEsfRoomVo"/>
+        <where>
+            <if test="regionId != null ">
+                and region_id = #{regionId}
+            </if>
+            <if test="roomName != null  and roomName != ''">
+                and room_name like concat('%', #{roomName}, '%')
+            </if>
+            <if test="roomType != null ">
+                and room_type = #{roomType}
+            </if>
+            <if test="roomSpec != null ">
+                and room_spec = #{roomSpec}
+            </if>
+            <if test="roomCapacity != null ">
+                and room_capacity = #{roomCapacity}
+            </if>
+            <if test="roomPic != null  and roomPic != ''">
+                and room_pic = #{roomPic}
+            </if>
+            <if test="roomStatus != null ">
+                and room_status = #{roomStatus}
+            </if>
+            <if test="roomCost != null ">
+                and room_cost = #{roomCost}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectEsfRoomById" parameterType="Long" resultMap="EsfRoomResult">
+        <include refid="selectEsfRoomVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertEsfRoom" parameterType="EsfRoom" useGeneratedKeys="true" keyProperty="id">
+        insert into esf_room
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="regionId != null">
+                region_id,
+            </if>
+            <if test="roomName != null">
+                room_name,
+            </if>
+            <if test="roomType != null">
+                room_type,
+            </if>
+            <if test="roomSpec != null">
+                room_spec,
+            </if>
+            <if test="roomCapacity != null">
+                room_capacity,
+            </if>
+            <if test="roomPic != null">
+                room_pic,
+            </if>
+            <if test="roomStatus != null">
+                room_status,
+            </if>
+            <if test="roomCost != null">
+                room_cost,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="regionId != null">
+                #{regionId},
+            </if>
+            <if test="roomName != null">
+                #{roomName},
+            </if>
+            <if test="roomType != null">
+                #{roomType},
+            </if>
+            <if test="roomSpec != null">
+                #{roomSpec},
+            </if>
+            <if test="roomCapacity != null">
+                #{roomCapacity},
+            </if>
+            <if test="roomPic != null">
+                #{roomPic},
+            </if>
+            <if test="roomStatus != null">
+                #{roomStatus},
+            </if>
+            <if test="roomCost != null">
+                #{roomCost},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateEsfRoom" parameterType="EsfRoom">
+        update esf_room
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="regionId != null">
+                region_id = #{regionId},
+            </if>
+            <if test="roomName != null">
+                room_name = #{roomName},
+            </if>
+            <if test="roomType != null">
+                room_type = #{roomType},
+            </if>
+            <if test="roomSpec != null">
+                room_spec = #{roomSpec},
+            </if>
+            <if test="roomCapacity != null">
+                room_capacity = #{roomCapacity},
+            </if>
+            <if test="roomPic != null">
+                room_pic = #{roomPic},
+            </if>
+            <if test="roomStatus != null">
+                room_status = #{roomStatus},
+            </if>
+            <if test="roomCost != null">
+                room_cost = #{roomCost},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEsfRoomById" parameterType="Long">
+        delete
+        from esf_room
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteEsfRoomByIds" parameterType="String">
+        delete from esf_room where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

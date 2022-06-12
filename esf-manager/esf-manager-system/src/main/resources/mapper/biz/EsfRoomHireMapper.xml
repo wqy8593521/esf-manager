@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esf.biz.mapper.EsfRoomHireMapper">
+    
+    <resultMap type="EsfRoomHire" id="EsfRoomHireResult">
+        <result property="id"    column="id"    />
+        <result property="tenantId"    column="tenant_id"    />
+        <result property="roomId"    column="room_id"    />
+        <result property="hireTerm"    column="hire_term"    />
+        <result property="remainTerm"    column="remain_term"    />
+        <result property="hirePrice"    column="hire_price"    />
+        <result property="deposit"    column="deposit"    />
+        <result property="depositStatus"    column="deposit_status"    />
+        <result property="hireStatus"    column="hire_status"    />
+        <result property="paymentStatus"    column="payment_status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectEsfRoomHireVo">
+        select id, tenant_id, room_id, hire_term, remain_term, hire_price, deposit, deposit_status, hire_status, payment_status, create_by, create_time, update_by, update_time, remark from esf_room_hire
+    </sql>
+
+    <select id="selectEsfRoomHireList" parameterType="EsfRoomHire" resultMap="EsfRoomHireResult">
+        <include refid="selectEsfRoomHireVo"/>
+        <where>  
+            <if test="tenantId != null "> and tenant_id = #{tenantId}</if>
+            <if test="roomId != null "> and room_id = #{roomId}</if>
+            <if test="hireTerm != null "> and hire_term = #{hireTerm}</if>
+            <if test="remainTerm != null "> and remain_term = #{remainTerm}</if>
+            <if test="hirePrice != null "> and hire_price = #{hirePrice}</if>
+            <if test="deposit != null "> and deposit = #{deposit}</if>
+            <if test="depositStatus != null "> and deposit_status = #{depositStatus}</if>
+            <if test="hireStatus != null "> and hire_status = #{hireStatus}</if>
+            <if test="paymentStatus != null "> and payment_status = #{paymentStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectEsfRoomHireById" parameterType="Long" resultMap="EsfRoomHireResult">
+        <include refid="selectEsfRoomHireVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertEsfRoomHire" parameterType="EsfRoomHire" useGeneratedKeys="true" keyProperty="id">
+        insert into esf_room_hire
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tenantId != null">tenant_id,</if>
+            <if test="roomId != null">room_id,</if>
+            <if test="hireTerm != null">hire_term,</if>
+            <if test="remainTerm != null">remain_term,</if>
+            <if test="hirePrice != null">hire_price,</if>
+            <if test="deposit != null">deposit,</if>
+            <if test="depositStatus != null">deposit_status,</if>
+            <if test="hireStatus != null">hire_status,</if>
+            <if test="paymentStatus != null">payment_status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tenantId != null">#{tenantId},</if>
+            <if test="roomId != null">#{roomId},</if>
+            <if test="hireTerm != null">#{hireTerm},</if>
+            <if test="remainTerm != null">#{remainTerm},</if>
+            <if test="hirePrice != null">#{hirePrice},</if>
+            <if test="deposit != null">#{deposit},</if>
+            <if test="depositStatus != null">#{depositStatus},</if>
+            <if test="hireStatus != null">#{hireStatus},</if>
+            <if test="paymentStatus != null">#{paymentStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEsfRoomHire" parameterType="EsfRoomHire">
+        update esf_room_hire
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tenantId != null">tenant_id = #{tenantId},</if>
+            <if test="roomId != null">room_id = #{roomId},</if>
+            <if test="hireTerm != null">hire_term = #{hireTerm},</if>
+            <if test="remainTerm != null">remain_term = #{remainTerm},</if>
+            <if test="hirePrice != null">hire_price = #{hirePrice},</if>
+            <if test="deposit != null">deposit = #{deposit},</if>
+            <if test="depositStatus != null">deposit_status = #{depositStatus},</if>
+            <if test="hireStatus != null">hire_status = #{hireStatus},</if>
+            <if test="paymentStatus != null">payment_status = #{paymentStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEsfRoomHireById" parameterType="Long">
+        delete from esf_room_hire where id = #{id}
+    </delete>
+
+    <delete id="deleteEsfRoomHireByIds" parameterType="String">
+        delete from esf_room_hire where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
